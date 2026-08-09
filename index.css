@@ -18,3 +18,17 @@ button {
     border: none;
     font-weight: bold;
 }
+
+ul {
+    list-style-type: none; /* Removes the bullet points */
+    padding: 0; /* Removes default left indentation */
+    margin: 0; /* Removes default top/bottom spacing */
+}
+
+a {
+    color: #5f9341;
+}
+
+li {
+    margin-top: 5px;
+}
