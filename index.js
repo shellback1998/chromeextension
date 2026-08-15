@@ -1,5 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js"
-import { getDatabase } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-database.js"
+import { getDatabase,
+        ref} from "https://www.gstatic.com/firebasejs/12.17.1/firebase-database.js"
 
 const firebaseConfig = {
     databaseURL : "https://leads-tracker-app-bccd7-default-rtdb.firebaseio.com/"
@@ -7,6 +8,7 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig)
 const database = getDatabase(app)
+const referenceInDB = ref(database, "birthdays")
 
 const inputEl = document.getElementById("input-el")
 const inputBtn = document.getElementById("input-btn")
