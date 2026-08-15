@@ -1,6 +1,8 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js"
 import { getDatabase,
-        ref} from "https://www.gstatic.com/firebasejs/12.17.1/firebase-database.js"
+        ref,
+        push,
+        onValue} from "https://www.gstatic.com/firebasejs/12.17.1/firebase-database.js"
 
 const firebaseConfig = {
     databaseURL : "https://leads-tracker-app-bccd7-default-rtdb.firebaseio.com/"
@@ -8,7 +10,7 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig)
 const database = getDatabase(app)
-const referenceInDB = ref(database, "birthdays")
+const referenceInDB = ref(database, "leads")
 
 const inputEl = document.getElementById("input-el")
 const inputBtn = document.getElementById("input-btn")
@@ -29,11 +31,20 @@ function render(leads) {
     ulEl.innerHTML = listItems
 }
 
+onValue(referenceInDB, function(snapshot) {
+    console.log(snapshot.val())
+    const snapshotValues = snapshot.val()
+    const leads = Object.values(snapshotValues)
+    render(leads)
+})
+
+
 deleteBtn.addEventListener("dblclick", function() {
 
 })
 
 inputBtn.addEventListener("click", function() {
     console.log(inputEl.value)
+    push(referenceInDB,inputEl.value)
     inputEl.value = ""
 })
